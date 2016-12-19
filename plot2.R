@@ -16,14 +16,27 @@ time_slice <- as.Date(c("2/1/2007", '2/2/2007'), format="%m/%d/%Y")
 
 power_data_2day <- subset(power_data, power_data$Date %in% time_slice)
 
-plot(power_data_2day$DateTime, 
-     power_data_2day$Global_active_power,
-     type='l',
-     ylab="Global Active Power (kilowatts)",
-     xlab="", 
-     lty = 'solid')
 
+plot_the_data <- function(){
+        
+        par(mfrow=c(1,1))
 
-dev.copy(png,'plot2.png')
+        plot(power_data_2day$DateTime, 
+             power_data_2day$Global_active_power,
+             type='l',
+             ylab="Global Active Power (kilowatts)",
+             xlab="", 
+             lty = 'solid')
+
+        }
+
+plot_the_data()
+
+png(filename = "plot2.png",
+    width = 480, height = 480, units = "px", pointsize = 12,
+    bg = "white",
+    type =  "quartz")
+
+plot_the_data()
 dev.off()
 
